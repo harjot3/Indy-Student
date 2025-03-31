@@ -24,19 +24,25 @@ p {
 
 
     <div class = "front_zip_code">
-        <form>
+
             <label for="zip_code">Enter Your Zip Code:</label>
-            <input type="number" id = "zip_code" required>
-            <button type="button">Search</button>
-        </form>
+            <input type="text" id = "zip_code" required>
+
+            <a target="_blank" href="index2.html">
+                <button onclick="savein('zip_code', 'output')">Search</button>
+            </a>
+
     </div>
-    <h1 style = "text-align: center;"> It's Okay to learn</h1>
+
+    <p id = "output"></p>
+    <!--
+    <h1 style = "text-align: center;"> જો ગરમી હોય, તો લઈ જાઓ</h1>
     <img src = "images/guts 10 copy (1).png">
 
-    <p id = "first_js"></p>
-        
-    <button type="button" onclick= "apple(),fun()"  id = "d1"> My First Button</button>
+    <p id = "first_js">i like apples and bananas</p>
 
+    <button type="button" onclick= "apple(),fun()"  id = "d1"> My First Button</button>
+-->
 
 <script src = "myscript.js"></script>
 </body>
