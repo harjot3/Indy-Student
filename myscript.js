@@ -22,7 +22,11 @@ function universityEntered(uni_name) {
         document.getElementById("input").innerHTML = "Indiana University, Indianapolis, great choice!";
         lat = 39.775991;
         long =  -86.176811;
-        zoom = 15;
+        zoom = 14;
+
+        // adding icons near iui
+
+
     }
 
     else if (uni_name == "IVYTC") {
@@ -37,6 +41,7 @@ function universityEntered(uni_name) {
         lat = 39.709967
         long = -86.134518;
         zoom = 15;
+
     }
 
 
@@ -66,8 +71,6 @@ function universityEntered(uni_name) {
         zoom = 19;
     }
 
-
-
     createMap(lat, long, zoom, radius);
 }
 
@@ -75,7 +78,7 @@ universityEntered(selectedUni);
 
 // Creating Map
 
-function createMap(lat = 39.7684, long = -86.1581, zoom_input = 11) {
+function createMap(lat = 39.7684, long = -86.1581, zoom_input = 10) {
     // Default coordinates are for Indianapolis, Indiana (39.7684° N, 86.1581° W)
 
     // Define the map's initial configuration
@@ -84,10 +87,13 @@ function createMap(lat = 39.7684, long = -86.1581, zoom_input = 11) {
         zoom: zoom_input
     };
 
-    // Create the Leaflet map and set the tile layer
-    var layer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png");
     var map = new L.map('map', mapHash);
-    map.addLayer(layer);
+    // Create the Leaflet map and set the tile layer
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {maxZoom: 40, attribution: '© OpenStreetMap' }).addTo(map);
+
+
+
 
     // Creating Icon Class
     var LeafIcon = L.Icon.extend({
@@ -135,9 +141,6 @@ function createMap(lat = 39.7684, long = -86.1581, zoom_input = 11) {
     // adding markers to map
 
         // taco bell
-        var tacoBell = L.marker([39.780066, -86.173679]);
-        tacoBell.addTo(map).bindPopup
-        ('Name: Taco Bell<br>Address: 951 Indiana AvenueIndianapolis, IN 46202<br>Miles from Indiana University, Indianapolis: 0.3<br>Date Information Entered: ');
 
     return map; // Return the created map if needed for further use
 }
@@ -168,6 +171,7 @@ db.all("SELECT * FROM IndianaUniversityIndianapolis", [], (err, rows) => {
 
 // Close the database connection when done
 db.close();
+
 
 
 
