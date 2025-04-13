@@ -12,11 +12,16 @@ body, html {
 }
 
 #map {
-  height: 95vh;
+  height: 90vh;
   width: 100vw;
 }
 
 .front_page_text {
+  text-align: center;
+
+}
+
+.bottomSecondPageText {
   text-align: center;
   font-weight: bold;
 }

@@ -19,14 +19,14 @@ function universityEntered(uni_name) {
     }
 
     if (uni_name == "IUI") {
-        document.getElementById("input").innerHTML = "Indiana University, Indianapolis, great choice!";
+        let university = "Indiana University, Indianapolis";
+        document.getElementById("input").innerHTML = `<br>${university}, great choice!</br>`;
+        document.getElementById("title").innerHTML = university;
         lat = 39.775991;
         long =  -86.176811;
         zoom = 14;
 
         // adding icons near iui
-
-
     }
 
     else if (uni_name == "IVYTC") {
