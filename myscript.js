@@ -26,7 +26,7 @@ function universityEntered(uni_name) {
     }
 
     else if (uni_name == "IVYTC") {
-        document.getElementById("input").innerHTML = "Ivy Tech Community College- hey, I go there!";
+        document.getElementById("input").innerHTML = "Ivy Tech Community College- wait a second, I go there!";
         lat = 39.804199;
         long = -86.158626;
         zoom = 15;
