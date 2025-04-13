@@ -19,7 +19,7 @@ function universityEntered(uni_name) {
     }
 
     if (uni_name == "IUI") {
-        document.getElementById("input").innerHTML = "Indiana University, Indianapolis, great choice!<br>apples";
+        document.getElementById("input").innerHTML = "Indiana University, Indianapolis, great choice!";
         lat = 39.775991;
         long =  -86.176811;
         zoom = 15;
