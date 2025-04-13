@@ -93,8 +93,6 @@ function createMap(lat = 39.7684, long = -86.1581, zoom_input = 10) {
     {maxZoom: 40, attribution: '© OpenStreetMap' }).addTo(map);
 
 
-
-
     // Creating Icon Class
     var LeafIcon = L.Icon.extend({
         options: {
@@ -109,22 +107,9 @@ function createMap(lat = 39.7684, long = -86.1581, zoom_input = 10) {
 
     // creating icon objects
 
-        /*
-            Not being used at the moment
-            // green
-            var greenIconObject = new LeafIcon({iconUrl: 'images/leaf-green.png'});
-            let greenIcon = L.marker([lat, long] , { icon : greenIconObject} );
-
-
-            // orange
-            var orangeIconObject = new LeafIcon({iconUrl: 'images/leaf-orange.png'});
-            let orangeIcon = L.marker([lat, long] , { icon : orangeIconObject} );
-        */
-
-    // red
-    var redIconObject = new LeafIcon({iconUrl: 'images/leaf-red.png'});
-    let redIcon = L.marker([lat, long] , { icon : redIconObject} );
-
+        // red
+        var redIconObject = new LeafIcon({iconUrl: 'images/leaf-red.png'});
+        let redIcon = L.marker([lat, long] , { icon : redIconObject} );
 
     // adding icon to map
     redIcon.addTo(map);
@@ -141,6 +126,14 @@ function createMap(lat = 39.7684, long = -86.1581, zoom_input = 10) {
     // adding markers to map
 
         // taco bell
+
+        var tacoBellMarker1 = L.marker([39.780066, -86.173679],{alt : 'Taco Bell'});
+        tacoBellMarker1.addTo(map).bindPopup(
+            '<b>Name:</b> Taco Bell<br>' +
+            '<b>Address:</b> 951 Indiana AvenueIndianapolis, IN 46202<br>' +
+            '<b>Miles From Campus:</b> 0.3<br>' +
+            '<b>Date Info Entered:</b> 2025-04-12<br>' +
+            '<a href = "https://www.youtube.com/" target="_blank">YouTube</a>');
 
     return map; // Return the created map if needed for further use
 }
@@ -173,5 +166,19 @@ db.all("SELECT * FROM IndianaUniversityIndianapolis", [], (err, rows) => {
 db.close();
 
 
+/*
+
+Unused Icons:
+
+    // green
+    var greenIconObject = new LeafIcon({iconUrl: 'images/leaf-green.png'});
+    let greenIcon = L.marker([lat, long] , { icon : greenIconObject} );
+
+
+    // orange
+    var orangeIconObject = new LeafIcon({iconUrl: 'images/leaf-orange.png'});
+    let orangeIcon = L.marker([lat, long] , { icon : orangeIconObject} );
+
+*/
 
 
