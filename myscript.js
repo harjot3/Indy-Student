@@ -1,69 +1,173 @@
-/*
-document.getElementById("first_js").innerHTML = "My First JavaScript";
-*/
+console.log('Hello!');
 
-function fun() {
-    document.getElementById("first_js").innerHTML = 'Big ahh dih 💔';
-}
+// Get URL parameters
+const params = new URLSearchParams(window.location.search);
+const selectedUni = params.get("uni");
 
-function apple() {
-    document.getElementById("d1").innerHTML = "Veinny ahh Dih 💔";
-}
+// Set content based on selection
 
+function universityEntered(uni_name) {
+    let lat;
+    let long;
+    let zoom = 15;
+    let radius;
 
-function savein(var1, output) {
-
-
-    if (!document.getElementById(var1).value) {
-
-         /* Printing no zip code entered in front html */
-
-         document.getElementById(output).innerHTML = "You did not enter a Zip Code.";
-         let fal2 = false;
-         localStorage.setItem("let2", fal2);
-
+    if (uni_name) {
+        document.getElementById("input").innerHTML = "You selected " + selectedUni;
     } else {
-
-        /* Assigning Zip Code as userInput */
-        /* Printing it to the assigned output element in front html  */
-        /* Saving Zip Code as userInput */
-
-        let userInput = document.getElementById(var1).value;
-        localStorage.setItem("savedZipCode", userInput);
-
-
-        let fal2 = true;
-        localStorage.setItem("let2", fal2);
-
-        /* Accessing Zip Code as userInput */
-        let savedCode = localStorage.getItem("savedZipCode");
-        document.getElementById(output).innerHTML = "You entered " + savedCode + " as a Zip Code.";
+        return;
     }
 
+    if (uni_name == "IUI") {
+        document.getElementById("input").innerHTML = "Indiana University, Indianapolis, great choice!<br>apples";
+        lat = 39.775991;
+        long =  -86.176811;
+        zoom = 15;
+    }
+
+    else if (uni_name == "IVYTC") {
+        document.getElementById("input").innerHTML = "Ivy Tech Community College- hey, I go there!";
+        lat = 39.804199;
+        long = -86.158626;
+        zoom = 15;
+    }
+
+    else if (uni_name == "UIndy") {
+        document.getElementById("input").innerHTML = "University of Indianapolis- wait, this is a thing?";
+        lat = 39.709967
+        long = -86.134518;
+        zoom = 15;
+    }
+
+
+    else if (uni_name == "MarianU") {
+        document.getElementById("input").innerHTML = "Marian University, great choice!";
+        lat = 39.812334;
+        long = -86.204259;
+        zoom = 15;
+    }
+    else if (uni_name == "ButlerU") {
+        document.getElementById("input").innerHTML = "Butler University, great choice!";
+        lat = 39.841010;
+        long = -86.174033;
+        zoom = 15;
+    }
+
+    else if (uni_name == "MartU") {
+        document.getElementById("input").innerHTML = "Martin University, great choice!";
+        lat = 39.798712;
+        long = -86.104;
+        zoom = 17;
+    }
+    else if (uni_name == "VinU") {
+        document.getElementById("input").innerHTML = "Vincennes University, great choice!";
+        lat = 38.686426;
+        long = -87.523433;
+        zoom = 19;
+    }
+
+
+
+    createMap(lat, long, zoom, radius);
 }
 
-if (localStorage.getItem("let2") == "true") {
-    document.getElementById("zip_entered").innerHTML = "You entered zip code " + localStorage.getItem("savedZipCode") + ".";
-} else {
-    document.getElementById("zip_entered").innerHTML = "You did not enter a zip code. ";
+universityEntered(selectedUni);
+
+// Creating Map
+
+function createMap(lat = 39.7684, long = -86.1581, zoom_input = 11) {
+    // Default coordinates are for Indianapolis, Indiana (39.7684° N, 86.1581° W)
+
+    // Define the map's initial configuration
+    let mapHash = {
+        center: [lat, long],
+        zoom: zoom_input
+    };
+
+    // Create the Leaflet map and set the tile layer
+    var layer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png");
+    var map = new L.map('map', mapHash);
+    map.addLayer(layer);
+
+    // Creating Icon Class
+    var LeafIcon = L.Icon.extend({
+        options: {
+            shadowUrl: 'images/leaf-shadow.png',
+            iconSize:     [38, 95],
+            shadowSize:   [50, 64],
+            iconAnchor:   [22, 94],
+            shadowAnchor: [4, 62],
+            popupAnchor:  [-3, -76]
+        }
+    });
+
+    // creating icon objects
+
+        /*
+            Not being used at the moment
+            // green
+            var greenIconObject = new LeafIcon({iconUrl: 'images/leaf-green.png'});
+            let greenIcon = L.marker([lat, long] , { icon : greenIconObject} );
+
+
+            // orange
+            var orangeIconObject = new LeafIcon({iconUrl: 'images/leaf-orange.png'});
+            let orangeIcon = L.marker([lat, long] , { icon : orangeIconObject} );
+        */
+
+    // red
+    var redIconObject = new LeafIcon({iconUrl: 'images/leaf-red.png'});
+    let redIcon = L.marker([lat, long] , { icon : redIconObject} );
+
+
+    // adding icon to map
+    redIcon.addTo(map);
+
+    // adding circle to map
+    var circle = L.circle([lat, long], {
+        color: '#2471a3',
+        fillColor: '#2471a3',
+        fillOpacity: 0.5,
+        radius: 1000
+    });
+    circle.addTo(map);
+
+    // adding markers to map
+
+        // taco bell
+        var tacoBell = L.marker([39.780066, -86.173679]);
+        tacoBell.addTo(map).bindPopup
+        ('Name: Taco Bell<br>Address: 951 Indiana AvenueIndianapolis, IN 46202<br>Miles from Indiana University, Indianapolis: 0.3<br>Date Information Entered: ');
+
+    return map; // Return the created map if needed for further use
 }
 
 
-// Coding the map
+// function to add cirlce to map
+function addCircle() {
 
-let RenoHouse = {
-    center: [39.639344, -119.863259],
-    zoom: 20
 }
 
-let mapHash = {
-    center: [39.7508, -86.1603],
-    zoom: 11
-}
+const sqlite3 = require('sqlite3').verbose();
 
-var map = new L.map('map', mapHash);
+// Connect to the database (will create it if it doesn't exist)
+const db = new sqlite3.Database('/Users/harjotsingh/code/server1/restauraunt_indy.db');
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
+// Run a SELECT query
+db.all("SELECT * FROM IndianaUniversityIndianapolis", [], (err, rows) => {
+  if (err) {
+    console.error(err.message);
+    return;
+  }
+
+  // Loop through the results
+  rows.forEach((row) => {
+    console.log(row);
+  });
+});
+
+// Close the database connection when done
+db.close();
+
+
+
