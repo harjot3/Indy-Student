@@ -119,7 +119,7 @@ function createMap(lat = 39.7684, long = -86.1581, zoom_input = 10) {
         color: '#2471a3',
         fillColor: '#2471a3',
         fillOpacity: 0.5,
-        radius: 5000
+        radius: 4000
     });
     circle.addTo(map);
 
