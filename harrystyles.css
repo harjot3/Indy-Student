@@ -18,6 +18,8 @@ body, html {
 
 .front_page_text {
   text-align: center;
+  line-height: 200%;
+  font-family: Arial, Helvetica, sans-serif ;
 
 }
 

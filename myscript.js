@@ -119,55 +119,41 @@ function createMap(lat = 39.7684, long = -86.1581, zoom_input = 10) {
         color: '#2471a3',
         fillColor: '#2471a3',
         fillOpacity: 0.5,
-        radius: 1000
+        radius: 5000
     });
     circle.addTo(map);
 
-    // adding markers to map
+    // Fetch and add Taco Bell Marker
+    fetch('restauraunts/IndianaUniversityIndianapolis.json')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        for (let i = 0; i < data.length; i ++ ) {
 
-        // taco bell
+            const item = data[i];
+            var restauraunt_marker = L.marker([item.latitude, item.longitude], {alt: item.name});
 
-        var tacoBellMarker1 = L.marker([39.780066, -86.173679],{alt : 'Taco Bell'});
-        tacoBellMarker1.addTo(map).bindPopup(
-            '<b>Name:</b> Taco Bell<br>' +
-            '<b>Address:</b> 951 Indiana AvenueIndianapolis, IN 46202<br>' +
-            '<b>Miles From Campus:</b> 0.3<br>' +
-            '<b>Date Info Entered:</b> 2025-04-12<br>' +
-            '<a href = "https://www.youtube.com/" target="_blank">YouTube</a>');
+            const popupContent =
+                `<b>Name:</b> ${item.name}<br>` +
+                `<b>Address:</b> ${item.address}<br>` +
+                `<b>Miles From Campus:</b> ${item.milesFromCampus}<br>` +
+                `<b>Date Info Entered:</b> ${item.dateInfoEntered}<br>` +
+                `<a href="https://www.youtube.com/" target="_blank">YouTube</a>`;
+
+            restauraunt_marker.addTo(map).bindPopup(popupContent);
+        }
+      })
+      .catch(error => {
+        console.error('Error loading JSON:', error);
+      });
+
 
     return map; // Return the created map if needed for further use
 }
 
 
-// function to add cirlce to map
-function addCircle() {
-
-}
-
-const sqlite3 = require('sqlite3').verbose();
-
-// Connect to the database (will create it if it doesn't exist)
-const db = new sqlite3.Database('/Users/harjotsingh/code/server1/restauraunt_indy.db');
-
-// Run a SELECT query
-db.all("SELECT * FROM IndianaUniversityIndianapolis", [], (err, rows) => {
-  if (err) {
-    console.error(err.message);
-    return;
-  }
-
-  // Loop through the results
-  rows.forEach((row) => {
-    console.log(row);
-  });
-});
-
-// Close the database connection when done
-db.close();
-
-
 /*
-
 Unused Icons:
 
     // green
