@@ -139,7 +139,7 @@ function createMap(lat = 39.7684, long = -86.1581, zoom_input = 10) {
                 `<b>Address:</b> ${item.address}<br>` +
                 `<b>Miles From Campus:</b> ${item.milesFromCampus}<br>` +
                 `<b>Date Info Entered:</b> ${item.dateInfoEntered}<br>` +
-                `<a href="https://www.youtube.com/" target="_blank">YouTube</a>`;
+                // `<a href="https://www.youtube.com/" target="_blank">YouTube</a>`;
 
             restauraunt_marker.addTo(map).bindPopup(popupContent);
         }
